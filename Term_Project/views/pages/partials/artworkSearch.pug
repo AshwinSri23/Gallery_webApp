@@ -1,0 +1,44 @@
+doctype html 
+html(lang = 'en') 
+    head 
+        title Artworks 
+    body 
+        div#pieces
+            div(style={float:"right",border:"solid"})
+                h2 Search
+                p Title: 
+                input#title(type="text",name="title",placeholder="Search")
+                br
+                br
+                p Name: 
+                input#name(type="text",name="name",placeholder="Search")
+                br
+                br
+                p Category: 
+                input#category(type="text",name="category",placeholder="Search") 
+                br
+                br
+                button#submit Submit
+
+        
+            each artwork in artworks
+                
+                div(style={border:"solid",width:"30%"})
+                    img(src=artwork.Poster,style = {width:"45%",height:"45%"})
+                    
+                    h2 #{artwork.Title}
+                    h4 Artist: #{artwork.Artist}
+                    h4 Year: #{artwork.Year}
+                    h4 Category: #{artwork.Category}
+                    h4 Medium: #{artwork.Artist}
+                    h4 Description: #{artwork.Artist}
+        
+
+            if current > 1
+                - let url = "/"+path+"?page="+(current-1)
+                a(href=url) Previous 
+                |
+            - url = "/"+path+"?page="+(current+1)
+            a(href=url) Next 
+script(src="arts.js")
+

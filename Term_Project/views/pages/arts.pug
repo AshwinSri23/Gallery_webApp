@@ -1,0 +1,47 @@
+doctype html 
+html(lang = 'en') 
+    head 
+        title Artworks 
+    body 
+        div(style={float:"right",border:"solid"})
+                form(method="GET",action="/arts")
+                    h2 Search
+                    label(for="title") Title: 
+                    input#title(type="text",name="title",placeholder="Search")
+                    br
+                    br
+                    label(for="name") Name: 
+                    input#name(type="text",name="name",placeholder="Search")
+                    br
+                    br
+                    label(for="category") Category:
+                    input#category(type="text",name="category",placeholder="Search") 
+                    br
+                    br
+                    button#submit Submit
+        div#results
+
+
+        div#pieces
+            if(artworks.length == 0)
+                h2 No results found
+            each artwork in artworks
+                
+                div(style={border:"solid",width:"30%"})
+                    img(src=artwork.Poster,style = {width:"45%",height:"45%"})
+                    
+                    h2 #{artwork.Title}
+                    h4 Artist: #{artwork.Artist}
+                    h4 Year: #{artwork.Year}
+                    h4 Category: #{artwork.Category}
+                    h4 Medium: #{artwork.Artist}
+                    h4 Description: #{artwork.Artist}
+        if current > 1
+            - let url = "/arts?"+queryString+"&page="+(current-1)
+            a(href=url) Previous 
+            |
+        - url = "/arts?"+queryString+"&page="+(current+1)
+        a(href=url) Next 
+        p #{queryString}
+script(src="arts.js")
+
